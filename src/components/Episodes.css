@@ -1,0 +1,223 @@
+.episodes {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+
+.episodes__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
+}
+
+/* Header */
+.episodes__header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.episodes__title {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--warm-white);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.episodes__subtitle {
+  font-family: var(--font-elegant);
+  font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+  font-style: italic;
+  color: rgba(250, 245, 237, 0.45);
+  letter-spacing: 0.08em;
+}
+
+/* Grid */
+.episodes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card */
+.ep-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.ep-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: var(--card-shadow);
+}
+
+.ep-card--locked {
+  opacity: 0.65;
+}
+
+/* Visual area */
+.ep-card__visual {
+  position: relative;
+  height: 8rem;
+  background: linear-gradient(135deg, #0a0505 0%, #14080a 50%, #0a0a14 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ep-card__number-bg {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(201, 168, 76, 0.07);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  user-select: none;
+}
+
+.ep-card__overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(10, 10, 10, 0.9) 100%);
+}
+
+.ep-card__locked-badge {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Content */
+.ep-card__content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.ep-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ep-card__ep-label {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  font-weight: 500;
+}
+
+.ep-card__duration {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.ep-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--warm-white);
+}
+
+.ep-card__divider {
+  width: 2rem;
+  height: 1px;
+  background: var(--gold-dim);
+  transition: width 0.4s ease;
+}
+
+.ep-card:hover .ep-card__divider {
+  width: 3.5rem;
+}
+
+.ep-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(250, 245, 237, 0.45);
+  flex: 1;
+}
+
+/* Button */
+.ep-card__btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.ep-card__btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: var(--gold);
+}
+
+.ep-card__btn--disabled {
+  color: var(--text-dim);
+  border-color: rgba(255, 255, 255, 0.08);
+  cursor: not-allowed;
+}
+
+.ep-card__btn--disabled:hover {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Disclaimer */
+.episodes__disclaimer {
+  text-align: center;
+  margin-top: 3rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .episodes__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .episodes__grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,93 @@
+.game-intro {
+  position: relative;
+  padding: clamp(6rem, 12vw, 12rem) 0;
+  overflow: hidden;
+  background: var(--deep-black);
+}
+
+.game-intro__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(107, 0, 0, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+}
+
+.game-intro__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.game-intro__content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.game-intro__line-wrapper {
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.game-intro__line {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6.5vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  color: var(--warm-white);
+  text-shadow: 0 0 40px rgba(201, 168, 76, 0.1);
+}
+
+.game-intro__line:first-child {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold), var(--champagne));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-intro__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem auto;
+  transform-origin: center;
+}
+
+.game-intro__ornament-line {
+  display: block;
+  width: 8rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim));
+}
+
+.game-intro__ornament-line:last-child {
+  background: linear-gradient(90deg, var(--gold-dim), transparent);
+}
+
+.game-intro__ornament-diamond {
+  color: var(--gold);
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.game-intro__body {
+  font-family: var(--font-elegant);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(250, 245, 237, 0.5);
+  letter-spacing: 0.03em;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .game-intro__ornament-line { width: 4rem; }
+}
