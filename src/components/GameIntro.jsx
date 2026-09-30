@@ -59,9 +59,9 @@ export default function GameIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            In a palace where luxury masks deception, fifteen strangers
-            are thrown into the ultimate psychological game. Among them
-            — hidden in plain sight — are the Traitors.
+            In Suryagarh Palace, Jaisalmer, 21 of India's most recognisable faces
+            were thrown into the ultimate psychological game — hosted by Karan Johar.
+            Among them, hidden in plain sight, were the Traitors.
           </motion.p>
         </div>
       </div>

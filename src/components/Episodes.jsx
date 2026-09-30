@@ -65,7 +65,7 @@ export default function Episodes() {
             animate={headInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            SEASON ONE
+            SEASON TWO · PRIME VIDEO
           </motion.div>
 
           <motion.h2
@@ -100,7 +100,7 @@ export default function Episodes() {
           animate={headInView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.8 }}
         >
-          * Episode titles and descriptions are fictional placeholder content for this demo concept.
+          * Episode descriptions are interpreted from publicly available information. Stream all 10 episodes on Prime Video India.
         </motion.p>
       </div>
     </section>

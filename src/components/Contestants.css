@@ -159,10 +159,49 @@
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+/* Role badge */
+.contestant-card__role-badge {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.48rem;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 5;
 }
+
+.contestant-card__role-badge--winner {
+  background: rgba(201, 168, 76, 0.15);
+  border: 1px solid rgba(201, 168, 76, 0.6);
+  color: var(--gold);
+}
+
+.contestant-card__role-badge--traitor {
+  background: rgba(139, 0, 0, 0.2);
+  border: 1px solid rgba(224, 85, 85, 0.5);
+  color: #e05555;
+}
+
+/* Status badge variants */
+.contestant-card__status-badge--winner { color: var(--gold); }
+.contestant-card__status-badge--winner .contestant-card__status-dot { background: var(--gold); }
+.contestant-card__status-badge--traitor { color: #e05555; }
+.contestant-card__status-badge--traitor .contestant-card__status-dot { background: #e05555; }
+.contestant-card__status-badge--innocent { color: var(--gold); }
+
+/* Alias */
+.contestant-card__alias {
+  font-size: 0.65em;
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-top: 0.1rem;
+}
+
 
 /* Gold border */
 .contestant-card__border {

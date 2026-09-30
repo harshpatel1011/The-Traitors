@@ -23,7 +23,7 @@ export default function Castle() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            LOCATION
+            SEASON 2 FILMING LOCATION
           </motion.div>
 
           <motion.h2
@@ -32,7 +32,7 @@ export default function Castle() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1 }}
           >
-            THE CASTLE
+            SURYAGARH PALACE
           </motion.h2>
 
           <motion.p
@@ -41,8 +41,9 @@ export default function Castle() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Behind these walls, alliances are formed, secrets are buried,<br />
-            and every night could change the game.
+            Jaisalmer, Rajasthan — the majestic setting of Season 2.
+            Behind these golden walls, alliances were forged, secrets were buried,
+            and 21 players' fates were decided night after night.
           </motion.p>
         </div>
 

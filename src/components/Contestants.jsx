@@ -6,10 +6,17 @@ import './Contestants.css';
 const INITIALS_COLORS = [
   '#8b0000', '#4a1942', '#1a3a2a', '#2a1a3a',
   '#1a2a3a', '#3a1a1a', '#2a2a1a', '#1a3a3a',
+  '#3a2a1a', '#1a1a3a', '#2a3a1a', '#3a1a3a',
 ];
 
 function getInitials(name) {
-  return name.split(' ').map(w => w[0]).join('');
+  return name.split(' ').slice(0, 2).map(w => w[0]).join('');
+}
+
+function getRoleBadgeClass(role, winner) {
+  if (winner) return 'contestant-card__role-badge--winner';
+  if (role === 'TRAITOR') return 'contestant-card__role-badge--traitor';
+  return 'contestant-card__role-badge--innocent';
 }
 
 function ContestantCard({ contestant, index }) {
@@ -17,13 +24,15 @@ function ContestantCard({ contestant, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-5%' });
 
+  const displayLabel = contestant.displayName || contestant.name;
+
   return (
     <motion.div
       ref={ref}
       className="contestant-card"
       initial={{ opacity: 0, y: 60 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: (index % 4) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, delay: (index % 4) * 0.1, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -10 }}
@@ -32,7 +41,7 @@ function ContestantCard({ contestant, index }) {
       <div className="contestant-card__image-wrap">
         <div
           className="contestant-card__avatar"
-          style={{ background: `radial-gradient(ellipse at 30% 30%, ${INITIALS_COLORS[index % 8]}88, ${INITIALS_COLORS[index % 8]}22)` }}
+          style={{ background: `radial-gradient(ellipse at 30% 30%, ${INITIALS_COLORS[index % 12]}88, ${INITIALS_COLORS[index % 12]}22)` }}
         >
           <span className="contestant-card__initials">{getInitials(contestant.name)}</span>
           <div className="contestant-card__avatar-pattern" />
@@ -50,11 +59,10 @@ function ContestantCard({ contestant, index }) {
             >
               <div className="contestant-card__overlay-info">
                 <p className="contestant-card__city">{contestant.city}</p>
-                <p className="contestant-card__age">Age {contestant.age}</p>
                 <p className="contestant-card__overlay-desc">{contestant.description}</p>
-                <div className="contestant-card__status-badge">
+                <div className={`contestant-card__status-badge contestant-card__status-badge--${contestant.winner ? 'winner' : contestant.role === 'TRAITOR' ? 'traitor' : 'innocent'}`}>
                   <span className="contestant-card__status-dot" />
-                  STATUS: {contestant.status}
+                  {contestant.status}
                 </div>
               </div>
             </motion.div>
@@ -70,11 +78,23 @@ function ContestantCard({ contestant, index }) {
 
         {/* Player number */}
         <div className="contestant-card__num">PLAYER {contestant.number}</div>
+
+        {/* Role badge */}
+        {(contestant.winner || contestant.role === 'TRAITOR') && (
+          <div className={`contestant-card__role-badge ${getRoleBadgeClass(contestant.role, contestant.winner)}`}>
+            {contestant.winner ? '🏆 WINNER' : '⚔ TRAITOR'}
+          </div>
+        )}
       </div>
 
       {/* Info */}
       <div className="contestant-card__info">
-        <h3 className="contestant-card__name">{contestant.name}</h3>
+        <h3 className="contestant-card__name">
+          {displayLabel}
+          {contestant.displayName && (
+            <span className="contestant-card__alias"> ({contestant.name.split(' ')[0]})</span>
+          )}
+        </h3>
         <p className="contestant-card__profession">{contestant.profession}</p>
       </div>
     </motion.div>
@@ -98,7 +118,7 @@ export default function Contestants() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            THE PLAYERS
+            SEASON 2 · 21 PLAYERS
           </motion.div>
 
           <motion.h2
@@ -126,16 +146,6 @@ export default function Contestants() {
             <ContestantCard key={c.id} contestant={c} index={i} />
           ))}
         </div>
-
-        {/* Disclaimer */}
-        <motion.p
-          className="contestants__disclaimer"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          * All contestant profiles are fictional placeholder data for this demo concept.
-        </motion.p>
       </div>
     </section>
   );

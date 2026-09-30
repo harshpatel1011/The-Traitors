@@ -5,18 +5,18 @@ import './Gallery.css';
 
 // Generate placeholder gallery items with different sizes
 const galleryItems = [
-  { id: 1, category: 'THE CAST', size: 'large', label: 'THE PLAYERS ARRIVE', sub: 'Cast · Season One' },
-  { id: 2, category: 'THE CASTLE', size: 'tall', label: 'GRAND CORRIDORS', sub: 'Location' },
-  { id: 3, category: 'THE GAME', size: 'normal', label: 'THE ROUNDTABLE', sub: 'Game · Episode 1' },
-  { id: 4, category: 'BEHIND THE SCENES', size: 'normal', label: 'BEHIND THE SCENES', sub: 'Production' },
-  { id: 5, category: 'THE CAST', size: 'normal', label: 'PLAYER PORTRAIT', sub: 'Cast' },
-  { id: 6, category: 'THE CASTLE', size: 'wide', label: 'THE DINING HALL', sub: 'Location' },
+  { id: 1, category: 'THE CAST', size: 'large', label: 'THE 21 PLAYERS ARRIVE', sub: 'Cast · Season Two' },
+  { id: 2, category: 'SURYAGARH PALACE', size: 'tall', label: 'GOLDEN CORRIDORS', sub: 'Jaisalmer, Rajasthan' },
+  { id: 3, category: 'THE GAME', size: 'normal', label: 'THE CIRCLE OF SHAQ', sub: 'Game · Round Table' },
+  { id: 4, category: 'BEHIND THE SCENES', size: 'normal', label: 'KARAN JOHAR ON SET', sub: 'Production · Season 2' },
+  { id: 5, category: 'THE CAST', size: 'normal', label: 'KRYSTLE D\'SOUZA', sub: 'Cast · WINNER' },
+  { id: 6, category: 'SURYAGARH PALACE', size: 'wide', label: 'THE DINING HALL', sub: 'Suryagarh Palace' },
   { id: 7, category: 'THE GAME', size: 'normal', label: 'FIRST BANISHMENT', sub: 'Game · Episode 2' },
-  { id: 8, category: 'BEHIND THE SCENES', size: 'normal', label: 'PRODUCTION TEAM', sub: 'Behind The Scenes' },
-  { id: 9, category: 'THE CAST', size: 'normal', label: 'ALLIANCE MEETING', sub: 'Cast · Exclusive' },
-  { id: 10, category: 'THE CASTLE', size: 'normal', label: "TRAITORS' CHAMBER", sub: 'Location · Exclusive' },
-  { id: 11, category: 'THE GAME', size: 'wide', label: 'THE MISSION', sub: 'Game · Episode 3' },
-  { id: 12, category: 'BEHIND THE SCENES', size: 'normal', label: 'LIGHTING SETUP', sub: 'Production' },
+  { id: 8, category: 'BEHIND THE SCENES', size: 'normal', label: 'PRODUCTION NIGHT SHOOT', sub: 'Behind The Scenes' },
+  { id: 9, category: 'THE CAST', size: 'normal', label: 'RIDA THARANA', sub: 'Cast · WINNER' },
+  { id: 10, category: 'SURYAGARH PALACE', size: 'normal', label: "TRAITORS' CHAMBER", sub: 'Location · Classified' },
+  { id: 11, category: 'THE GAME', size: 'wide', label: 'THE MISSION', sub: 'Game · Episode 4' },
+  { id: 12, category: 'BEHIND THE SCENES', size: 'normal', label: 'FINALE NIGHT', sub: 'Sep 3, 2026' },
 ];
 
 const BG_GRADIENTS = [

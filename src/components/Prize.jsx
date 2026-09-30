@@ -27,15 +27,23 @@ function useCountUp(target, duration, inView) {
 }
 
 function formatIndian(n) {
-  // Format as Indian numbering: XX,XX,XX,XXX
-  const str = n.toString().padStart(9, '0');
-  return `${str.slice(0, 2)},${str.slice(2, 4)},${str.slice(4, 6)},${str.slice(6)}`;
+  // Format as Indian numbering system (e.g. 66,00,000)
+  if (n === 0) return '00,00,000';
+  const s = n.toString();
+  if (s.length <= 3) return s;
+  if (s.length <= 5) return s.slice(0, s.length - 3) + ',' + s.slice(-3);
+  // For numbers like 6600000 (7 digits) → 66,00,000
+  const last3 = s.slice(-3);
+  const rest = s.slice(0, -3);
+  const last2 = rest.slice(-2);
+  const leading = rest.slice(0, -2);
+  return (leading ? leading + ',' : '') + last2 + ',' + last3;
 }
 
 export default function Prize() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-15%' });
-  const count = useCountUp(10_00_00_000, 2800, inView);
+  const count = useCountUp(66_00_000, 2500, inView);
 
   return (
     <section className="prize section-padding" ref={ref}>
@@ -74,8 +82,8 @@ export default function Prize() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1 }}
           >
-            ONE PRIZE.<br />
-            <span className="prize__heading-sub">COUNTLESS BETRAYALS.</span>
+            THE PRIZE WAS REAL.<br />
+            <span className="prize__heading-sub">SO WAS THE BETRAYAL.</span>
           </motion.h2>
 
           <motion.div
@@ -106,7 +114,7 @@ export default function Prize() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-            * Prize amount shown is a fictional placeholder for this demo concept.
+            Prize pot: up to ₹1 Crore · Season 2 winners Krystle D'Souza & Rida Tharana claimed ₹66 Lakh
           </motion.p>
 
           <motion.p
@@ -115,7 +123,8 @@ export default function Prize() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 1 }}
           >
-            At the end of the game, only the cleverest — or the most ruthless — will walk away.
+            Two Traitors. Nineteen Innocents. One palace. One winner's circle.
+            At the end of the game — only the most ruthless walked away.
           </motion.p>
         </div>
       </div>

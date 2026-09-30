@@ -77,10 +77,10 @@ export default function Footer() {
         {/* Bottom */}
         <div className="footer__bottom">
           <p className="footer__copy">
-            © 2026 The Traitors India. Demo concept. Not officially affiliated with any
-            broadcaster, production company, or rights holder.
+            © 2026 The Traitors India — Season 2. Streaming on Prime Video.
+            Fan landing page concept. Not officially affiliated with Amazon, Banijay Asia, or any rights holder.
           </p>
-          <p className="footer__tagline">TRUST IS THE DEADLIEST GAME.</p>
+          <p className="footer__tagline">"Rise and shine… it's dhoka time." — Karan Johar</p>
         </div>
       </div>
     </footer>

@@ -84,7 +84,7 @@ export default function Hero({ onTrailerClick }) {
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           <span className="hero__prelabel-line" />
-          <span>SEASON ONE · 2026</span>
+          <span>SEASON TWO · NOW STREAMING</span>
           <span className="hero__prelabel-line" />
         </motion.div>
 
@@ -131,8 +131,8 @@ export default function Hero({ onTrailerClick }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.1, duration: 0.9 }}
         >
-          Enter a world where friendships are tested, alliances collapse,<br className="hero__br" />
-          and betrayal hides behind every smile.
+          Rise and shine… it's <em>dhoka time</em>, again. Karan Johar returns as gamemaster<br className="hero__br" />
+          for the most deceptive season yet — filmed at Suryagarh Palace, Jaisalmer.
         </motion.p>
 
         {/* Buttons */}

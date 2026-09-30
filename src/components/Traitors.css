@@ -245,8 +245,94 @@
   margin: 0 auto;
 }
 
-/* Responsive */
+/* Subtitle text */
+.traitors__subtitle-text {
+  font-family: var(--font-elegant);
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(250, 245, 237, 0.4);
+  letter-spacing: 0.04em;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.75;
+  text-align: center;
+}
+
+/* Reveal box */
+.traitors__reveal-box {
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(10, 5, 5, 0.8);
+  padding: 2rem 3rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.traitors__reveal-label {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1.5rem;
+}
+
+.traitors__reveal-names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.traitors__reveal-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--warm-white);
+}
+
+.traitors__reveal-trophy {
+  font-size: 1.2rem;
+}
+
+.traitors__reveal-role {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-dim);
+  font-weight: 400;
+}
+
+.traitors__reveal-divider {
+  color: rgba(201, 168, 76, 0.3);
+  font-size: 0.8rem;
+}
+
+.traitors__reveal-prize {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
 @media (max-width: 600px) {
+  .traitors__reveal-box { padding: 1.5rem; }
+  .traitors__reveal-names { flex-direction: column; gap: 1rem; }
+  .traitors__reveal-divider { display: none; }
+}
+
   .traitors__silhouettes { gap: 2rem; }
   .traitors__data-row { flex-direction: column; gap: 0.3rem; text-align: center; }
   .traitors__data-label { text-align: center; min-width: unset; }
