@@ -67,12 +67,68 @@
 /* ── Cards Grid ── */
 .traitors__cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   position: relative;
   z-index: 1;
   margin-bottom: clamp(3rem, 5vw, 5rem);
 }
+
+/* Winner pair: 2-col centered row */
+.traitors__cards .traitor-card:nth-child(1),
+.traitors__cards .traitor-card:nth-child(2) {
+  /* naturally spans col 1 and 2 in a 3-col grid on first row */
+}
+
+/* Dark accent (exposed traitors) */
+.traitor-card--dark {
+  border-color: rgba(180, 80, 80, 0.15);
+  opacity: 0.9;
+}
+
+.traitor-card--dark::before {
+  background: radial-gradient(ellipse at 50% 0%, rgba(100, 20, 20, 0.08) 0%, transparent 60%);
+}
+
+.traitor-card--dark:hover {
+  border-color: rgba(200, 80, 80, 0.3);
+}
+
+.tc-stat__fill--dark {
+  background: linear-gradient(90deg, #4a1010, #c04444, #e07070);
+}
+
+.traitor-card__tag--dark {
+  color: #c44;
+  border-color: rgba(200, 80, 80, 0.35);
+  background: rgba(139, 0, 0, 0.08);
+}
+
+.traitor-card__name-accent--dark {
+  background: linear-gradient(135deg, #8b0000, #c04444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.traitor-card__divider--dark {
+  background: linear-gradient(90deg, rgba(200, 80, 80, 0.4), transparent);
+}
+
+.traitor-card__eye--dark {
+  background: #c44;
+  box-shadow: 0 0 8px rgba(204, 68, 68, 0.9), 0 0 20px rgba(204, 68, 68, 0.4);
+}
+
+.traitor-card__avatar--dark {
+  border-color: rgba(180, 80, 80, 0.2);
+  background: radial-gradient(ellipse at 30% 30%, rgba(139, 0, 0, 0.12), rgba(20, 5, 5, 0.1));
+}
+
+.traitor-card--dark .traitor-card__initials { color: rgba(200, 80, 80, 0.45); }
+.traitor-card--dark .traitor-card__corner { border-color: rgba(200, 80, 80, 0.25); }
+.traitor-card--dark:hover .traitor-card__corner { border-color: rgba(200, 80, 80, 0.55); }
+
 
 /* ── Traitor Card ── */
 .traitor-card {
@@ -474,11 +530,12 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .traitors__cards { grid-template-columns: 1fr; gap: 1.5rem; }
-  .traitor-card { padding: 2rem 1.8rem; }
+  .traitors__cards { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .traitor-card { padding: 1.8rem 1.5rem; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .traitors__cards { grid-template-columns: 1fr; }
   .traitor-card { padding: 1.5rem; }
   .traitors__prize-callout { padding: 1.5rem; }
   .traitor-card__meta { flex-wrap: wrap; gap: 1rem; }
