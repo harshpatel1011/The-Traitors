@@ -2,161 +2,219 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './Traitors.css';
 
-const SILHOUETTES = [
-  { id: 1, label: 'TRAITOR I', delay: 0, name: '???' },
-  { id: 2, label: 'TRAITOR II', delay: 0.15, name: '???' },
-  { id: 3, label: 'TRAITOR III', delay: 0.3, name: '???' },
+const traitorData = [
+  {
+    id: 1,
+    code: 'TRAITOR — I',
+    name: 'KRYSTLE\nD\'SOUZA',
+    profession: 'Television Actor',
+    strategy: 'ORIGINAL TRAITOR',
+    episodes: 9,
+    eliminations: 'Multiple',
+    status: 'WINNER',
+    story: 'Appointed as a Traitor from the very first night. Her most audacious move: memorising an entire eviction letter word-for-word to protect her cover. Not once suspected by the Innocents. Walked away with the prize.',
+    stats: [
+      { label: 'Deception Rating', value: 97 },
+      { label: 'Suspicion Raised', value: 12 },
+      { label: 'Missions Survived', value: 9 },
+    ],
+    tag: 'NEVER SUSPECTED',
+    accent: 'gold',
+  },
+  {
+    id: 2,
+    code: 'TRAITOR — II',
+    name: 'RIDA\nTHARANA',
+    profession: 'Influencer',
+    strategy: 'RECRUITED MID-GAME',
+    episodes: 5,
+    eliminations: 'Multiple',
+    status: 'WINNER',
+    story: 'Began the game as an Innocent — loyal, trusted, building alliances. Then came the knock on the door. Recruited as a Traitor mid-season, she transformed overnight into one of the most dangerous players in the palace.',
+    stats: [
+      { label: 'Deception Rating', value: 91 },
+      { label: 'Suspicion Raised', value: 28 },
+      { label: 'Missions Survived', value: 5 },
+    ],
+    tag: 'TURNED TRAITOR',
+    accent: 'crimson',
+  },
 ];
 
-const CLASSIFIED_LINES = [
-  { label: 'IDENTITY', value: 'CLASSIFIED' },
-  { label: 'LOYALTY', value: 'UNKNOWN' },
-  { label: 'THREAT LEVEL', value: 'HIGH' },
-];
-
-function GlitchText({ children }) {
+function StatBar({ label, value, accent, delay }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
   return (
-    <span className="glitch-text" data-text={children}>
-      {children}
-    </span>
+    <div className="tc-stat" ref={ref}>
+      <div className="tc-stat__header">
+        <span className="tc-stat__label">{label}</span>
+        <span className="tc-stat__val">{value}%</span>
+      </div>
+      <div className="tc-stat__track">
+        <motion.div
+          className={`tc-stat__fill tc-stat__fill--${accent}`}
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${value}%` } : {}}
+          transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function TraitorCard({ traitor, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-10%' });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`traitor-card traitor-card--${traitor.accent}`}
+      initial={{ opacity: 0, y: 70 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {/* Corner ornaments */}
+      <span className="traitor-card__corner traitor-card__corner--tl" />
+      <span className="traitor-card__corner traitor-card__corner--tr" />
+      <span className="traitor-card__corner traitor-card__corner--bl" />
+      <span className="traitor-card__corner traitor-card__corner--br" />
+
+      {/* Top row */}
+      <div className="traitor-card__top">
+        <span className="traitor-card__code">{traitor.code}</span>
+        <span className={`traitor-card__tag traitor-card__tag--${traitor.accent}`}>{traitor.tag}</span>
+      </div>
+
+      {/* Avatar placeholder */}
+      <div className={`traitor-card__avatar traitor-card__avatar--${traitor.accent}`}>
+        <div className="traitor-card__avatar-inner">
+          <div className="traitor-card__silhouette">
+            <svg viewBox="0 0 100 140" aria-hidden="true">
+              <ellipse cx="50" cy="30" rx="20" ry="24" fill="currentColor" opacity="0.15" />
+              <path d="M5 100 Q15 65 50 55 Q85 65 95 100 L95 140 L5 140 Z" fill="currentColor" opacity="0.12" />
+            </svg>
+          </div>
+          <div className="traitor-card__initials">
+            {traitor.name.trim().split(/\s+/).map(w => w[0]).join('')}
+          </div>
+        </div>
+        <div className={`traitor-card__eye traitor-card__eye--${traitor.accent}`} />
+      </div>
+
+      {/* Name */}
+      <div className="traitor-card__name-block">
+        <h3 className="traitor-card__name">
+          {traitor.name.split('\n').map((line, i) => (
+            <span key={i} className={i === 1 ? `traitor-card__name-accent traitor-card__name-accent--${traitor.accent}` : ''}>{line}</span>
+          ))}
+        </h3>
+        <p className="traitor-card__profession">{traitor.profession}</p>
+      </div>
+
+      {/* Divider */}
+      <div className={`traitor-card__divider traitor-card__divider--${traitor.accent}`} />
+
+      {/* Story */}
+      <p className="traitor-card__story">{traitor.story}</p>
+
+      {/* Stats */}
+      <div className="traitor-card__stats">
+        {traitor.stats.map((s, i) => (
+          <StatBar
+            key={s.label}
+            label={s.label}
+            value={s.value}
+            accent={traitor.accent}
+            delay={0.4 + i * 0.15}
+          />
+        ))}
+      </div>
+
+      {/* Meta row */}
+      <div className="traitor-card__meta">
+        <div className="traitor-card__meta-item">
+          <span className="traitor-card__meta-label">STRATEGY</span>
+          <span className="traitor-card__meta-val">{traitor.strategy}</span>
+        </div>
+        <div className="traitor-card__meta-sep" />
+        <div className="traitor-card__meta-item">
+          <span className="traitor-card__meta-label">EPISODES</span>
+          <span className="traitor-card__meta-val">{traitor.episodes}</span>
+        </div>
+        <div className="traitor-card__meta-sep" />
+        <div className="traitor-card__meta-item">
+          <span className="traitor-card__meta-label">OUTCOME</span>
+          <span className={`traitor-card__meta-val traitor-card__meta-val--winner`}>🏆 {traitor.status}</span>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
 export default function Traitors() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-10%' });
   const headRef = useRef(null);
   const headInView = useInView(headRef, { once: true, margin: '-10%' });
+  const prizeRef = useRef(null);
+  const prizeInView = useInView(prizeRef, { once: true, margin: '-10%' });
 
   return (
-    <section id="traitors" className="traitors section-padding" ref={ref}>
-      {/* Atmospheric backgrounds */}
+    <section id="traitors" className="traitors section-padding">
       <div className="traitors__bg" />
       <div className="traitors__vignette" />
-      <div className="traitors__scanlines" />
 
       <div className="section-container">
         {/* Header */}
         <div className="traitors__header" ref={headRef}>
           <motion.div
             className="section-label traitors__label"
-            initial={{ opacity: 0 }}
-            animate={headInView ? { opacity: 1 } : {}}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={headInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
           >
-            CLASSIFIED INTELLIGENCE · SEASON 2
+            CLASSIFIED · SEASON 2 REVEAL
           </motion.div>
 
           <motion.h2
             className="traitors__title"
             initial={{ opacity: 0, y: 50 }}
             animate={headInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.2, delay: 0.1 }}
+            transition={{ duration: 1.1, delay: 0.1 }}
           >
-            THEY WERE<br />
-            <span className="traitors__title-accent">AMONG YOU.</span>
+            THE TRAITORS
           </motion.h2>
 
           <motion.p
-            className="traitors__subtitle-text"
-            initial={{ opacity: 0, y: 20 }}
+            className="traitors__subtitle"
+            initial={{ opacity: 0, y: 24 }}
             animate={headInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.4 }}
+            transition={{ duration: 0.9, delay: 0.25 }}
           >
-            Hidden inside Suryagarh Palace, Jaisalmer — two Traitors deceived 19 Innocents
-            across 9 episodes. Their identities were never exposed.
+            Two players. Hidden in plain sight. Nineteen Innocents never stood a chance.
           </motion.p>
         </div>
 
-        {/* Silhouettes row */}
-        <div className="traitors__silhouettes">
-          {SILHOUETTES.map((s) => (
-            <motion.div
-              key={s.id}
-              className="traitor-sil"
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, delay: s.delay + 0.4 }}
-            >
-              {/* SVG Silhouette */}
-              <div className="traitor-sil__figure">
-                <svg viewBox="0 0 120 200" className="traitor-sil__svg" aria-hidden="true">
-                  <ellipse cx="60" cy="30" rx="22" ry="26" fill="rgba(5,2,2,0.95)" />
-                  <path
-                    d="M10 120 Q20 80 60 70 Q100 80 110 120 L110 200 L10 200 Z"
-                    fill="rgba(5,2,2,0.95)"
-                  />
-                  <ellipse cx="60" cy="30" rx="22" ry="26" fill="none"
-                    stroke="rgba(139,0,0,0.3)" strokeWidth="1" />
-                  <path
-                    d="M10 120 Q20 80 60 70 Q100 80 110 120"
-                    fill="none" stroke="rgba(139,0,0,0.2)" strokeWidth="1"
-                  />
-                </svg>
-                <div className="traitor-sil__eye" />
-              </div>
-
-              <div className="traitor-sil__info">
-                <span className="traitor-sil__label">
-                  <GlitchText>{s.label}</GlitchText>
-                </span>
-                <div className="traitor-sil__line" />
-              </div>
-            </motion.div>
+        {/* Cards */}
+        <div className="traitors__cards">
+          {traitorData.map((t, i) => (
+            <TraitorCard key={t.id} traitor={t} index={i} />
           ))}
         </div>
 
-        {/* Classified data */}
+        {/* Bottom prize callout */}
         <motion.div
-          className="traitors__classified"
+          className="traitors__prize-callout"
+          ref={prizeRef}
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.9 }}
+          animate={prizeInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.2 }}
         >
-          {CLASSIFIED_LINES.map((line) => (
-            <div key={line.label} className="traitors__data-row">
-              <span className="traitors__data-label">{line.label}</span>
-              <span className="traitors__data-sep">——</span>
-              <span className={`traitors__data-value traitors__data-value--${line.value.toLowerCase().replace(' ', '-')}`}>
-                {line.value}
-              </span>
-            </div>
-          ))}
+          <span className="traitors__prize-label">COMBINED PRIZE WON</span>
+          <span className="traitors__prize-amount">₹ 66,00,000</span>
+          <span className="traitors__prize-sub">
+            "Rise and shine… it's <em>dhoka time</em>." — Karan Johar
+          </span>
         </motion.div>
-
-        {/* Season 2 reveal note */}
-        <motion.div
-          className="traitors__reveal-box"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 1.1 }}
-        >
-          <p className="traitors__reveal-label">SEASON 2 WINNERS REVEALED</p>
-          <div className="traitors__reveal-names">
-            <div className="traitors__reveal-name">
-              <span className="traitors__reveal-trophy">🏆</span>
-              <span>KRYSTLE D'SOUZA</span>
-              <span className="traitors__reveal-role">Television Actor · Traitor from Day 1</span>
-            </div>
-            <div className="traitors__reveal-divider">✦</div>
-            <div className="traitors__reveal-name">
-              <span className="traitors__reveal-trophy">🏆</span>
-              <span>RIDA THARANA</span>
-              <span className="traitors__reveal-role">Influencer · Recruited as Traitor mid-game</span>
-            </div>
-          </div>
-          <p className="traitors__reveal-prize">Prize Won: ₹66 Lakh</p>
-        </motion.div>
-
-        {/* Bottom text */}
-        <motion.p
-          className="traitors__bottom-text"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 1.4 }}
-        >
-          "Rise and shine… it's dhoka time." — Karan Johar
-        </motion.p>
       </div>
     </section>
   );
